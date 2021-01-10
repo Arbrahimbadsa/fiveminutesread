@@ -19,7 +19,10 @@ export default function Home({posts}) {
 }
 
 export async function getStaticProps(context) {
-  const {posts} = await fetch('/api/posts').then(res => res.json());
+  const dev = process.env.NODE_ENV !== 'production';
+  //const server = dev ? 'http://localhost:3000' : 'https://fiveminutesread.netlify.app';
+  const server = dev ? `http://localhost:3000` : `https://fiveminutesread.netlify.app`;
+  const {posts} = await fetch(`${server}/api/posts`).then(res => res.json());
   return {
       props: {
           posts: posts.posts
