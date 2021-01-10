@@ -44,7 +44,7 @@ const Post = ({post = []}) => {
 }
 
 export async function getStaticPaths() {
-    const {posts} = await fetch(`http://localhost:3000/api/posts`).then(res => res.json());
+    const {posts} = await fetch(`/api/posts`).then(res => res.json());
     const paths = posts.posts.map(post => ({
         params: {id: post.id}
     }));
@@ -52,7 +52,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-    const {post} = await fetch(`http://localhost:3000/api/posts/${params.id}`).then(res => res.json());
+    const {post} = await fetch(`/api/posts/${params.id}`).then(res => res.json());
     return {
         props: {
             post
